@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>给宝宝的小礼物 🎂</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;}
+  body{background:#fdf6f8;color:#333;padding:20px;}
+  .login-box{max-width:400px;margin:100px auto;text-align:center;}
+  .login-box h2{font-size:22px;color:#e64980;margin-bottom:20px;}
+  input{width:80%;padding:12px 16px;border:1px solid #ddd;border-radius:12px;font-size:16px;text-align:center;}
+  button{margin-top:16px;padding:12px 30px;background:#e64980;color:white;border:none;border-radius:30px;font-size:16px;cursor:pointer;}
+  button:hover{opacity:0.9;}
+
+  .album{display:none;max-width:900px;margin:0 auto;text-align:center;}
+  .album h1{font-size:28px;color:#e64980;margin:30px 0;}
+  .count{font-size:18px;color:#e64980;margin-bottom:20px;font-weight:bold;}
+  .album .intro{font-size:18px;margin-bottom:50px;line-height:1.6;padding:0 20px;}
+  .stage{margin-bottom:50px;padding:0 15px;}
+  .stage h3{font-size:22px;color:#e64980;margin-bottom:12px;text-align:left;}
+  .stage p{font-size:16px;line-height:1.6;margin-bottom:15px;text-align:left;color:#555;}
+  .stage-photos{display:grid;grid-template-columns:repeat(auto-fill, minmax(150px, 1fr));gap:10px;}
+  .stage-photos img{width:100%;height:150px;object-fit:cover;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.1);cursor:pointer;transition:0.2s;}
+  .stage-photos img:hover{transform:scale(1.03);}
+
+  /* 照片放大弹窗 */
+  .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:999;padding:20px;}
+  .modal-content{max-width:90%;max-height:90%;margin:auto;display:block;border-radius:12px;}
+  .close{position:absolute;top:20px;right:30px;color:white;font-size:40px;cursor:pointer;}
+
+  .album .outro{font-size:18px;margin-top:40px;line-height:1.6;padding:0 20px;color:#333;}
+</style>
+</head>
+
+<body>
+<!-- 密码登录区 -->
+<div class="login-box">
+  <h2>只允许我的宝贝进入</h2>
+  <input type="password" id="pwd" placeholder="请输入密码">
+  <button onclick="unlock()">解锁进入</button>
+</div>
+
+<!-- 相册区 -->
+<div class="album">
+  <h1>生日快乐 宝宝宝宝臭宝宝 🎂</h1>
+  <!-- 在一起天数 -->
+  <div class="count" id="dayCount"></div>
+  <p class="intro">宝宝 和你在一起的每一天我都非常非常开心</p>
+
+  <!-- 阶段1（1-5，全JPG大写） -->
+  <div class="stage">
+    <h3></h3>
+    <p>我们第一次见面 你是不是就对我想图谋不轨了！？</p>
+    <div class="stage-photos">
+      <img src="1.JPG" onclick="showImg(this.src)">
+      <img src="2.JPG" onclick="showImg(this.src)">
+      <img src="3.JPG" onclick="showImg(this.src)">
+      <img src="4.JPG" onclick="showImg(this.src)">
+      <img src="5.JPG" onclick="showImg(this.src)">
+    </div>
+  </div>
+
+  <!-- 阶段2（6-10，全JPG大写） -->
+  <div class="stage">
+    <h3></h3>
+    <p>嗯….在公园的时候 你真的被我的鬼故事吓到了吗</p>
+    <div class="stage-photos">
+      <img src="6.JPG" onclick="showImg(this.src)">
+      <img src="7.JPG" onclick="showImg(this.src)">
+      <img src="8.JPG" onclick="showImg(this.src)">
+      <img src="9.JPG" onclick="showImg(this.src)">
+      <img src="10.JPG" onclick="showImg(this.src)">
+    </div>
+  </div>
+
+  <!-- 阶段3（11-15，全JPG大写） -->
+  <div class="stage">
+    <h3></h3>
+    <p>我喜欢和你在学校里的日子 宝宝</p>
+    <div class="stage-photos">
+      <img src="11.JPG" onclick="showImg(this.src)">
+      <img src="12.JPG" onclick="showImg(this.src)">
+      <img src="13.JPG" onclick="showImg(this.src)">
+      <img src="14.JPG" onclick="showImg(this.src)">
+      <img src="15.JPG" onclick="showImg(this.src)">
+    </div>
+  </div>
+
+  <!-- 阶段4（16-20，全JPG大写） -->
+  <div class="stage">
+    <h3></h3>
+    <p>去年的生日 哪怕你是十八岁 可是我们过的很草率 都怪可恶的高三</p>
+    <div class="stage-photos">
+      <img src="16.JPG" onclick="showImg(this.src)">
+      <img src="17.JPG" onclick="showImg(this.src)">
+      <img src="18.JPG" onclick="showImg(this.src)">
+      <img src="19.JPG" onclick="showImg(this.src)">
+      <img src="20.JPG" onclick="showImg(this.src)">
+    </div>
+  </div>
+
+  <!-- 阶段5（21-25，全JPG大写） -->
+  <div class="stage">
+    <h3></h3>
+    <p>我们一起在曲靖走过了好多好多地方 吃了好多好多好吃的</p>
+    <div class="stage-photos">
+      <img src="21.JPG" onclick="showImg(this.src)">
+      <img src="22.JPG" onclick="showImg(this.src)">
+      <img src="23.JPG" onclick="showImg(this.src)">
+      <img src="24.JPG" onclick="showImg(this.src)">
+      <img src="25.JPG" onclick="showImg(this.src)">
+    </div>
+  </div>
+
+  <!-- 阶段6（26-30，全JPG大写） -->
+  <div class="stage">
+    <h3></h3>
+    <p>我喜欢你每一个哪怕你觉得不喜欢的瞬间哦</p>
+    <div class="stage-photos">
+      <img src="26.JPG" onclick="showImg(this.src)">
+      <img src="27.JPG" onclick="showImg(this.src)">
+      <img src="28.JPG" onclick="showImg(this.src)">
+      <img src="29.JPG" onclick="showImg(this.src)">
+      <img src="30.JPG" onclick="showImg(this.src)">
+    </div>
+  </div>
+
+  <!-- 阶段7（31-35，全JPG大写） -->
+  <div class="stage">
+    <h3></h3>
+    <p>把你喂得饱饱的 是我最重要最幸福的任务（我的阻碍是你自己！）</p>
+    <div class="stage-photos">
+      <img src="31.JPG" onclick="showImg(this.src)">
+      <img src="32.JPG" onclick="showImg(this.src)">
+      <img src="33.JPG" onclick="showImg(this.src)">
+      <img src="34.JPG" onclick="showImg(this.src)">
+      <img src="35.JPG" onclick="showImg(this.src)">
+    </div>
+  </div>
+
+  <!-- 阶段8（36-40：36/37/38是png，39/40是JPG大写） -->
+  <div class="stage">
+    <h3></h3>
+    <p>海风吹呀吹 宝宝睡呀睡</p>
+    <div class="stage-photos">
+      <img src="36.png" onclick="showImg(this.src)">
+      <img src="37.png" onclick="showImg(this.src)">
+      <img src="38.png" onclick="showImg(this.src)">
+      <img src="39.JPG" onclick="showImg(this.src)">
+      <img src="40.JPG" onclick="showImg(this.src)">
+    </div>
+  </div>
+
+  <!-- 阶段9（41-45：41/44是小写jpg，42/43/45是png） -->
+  <div class="stage">
+    <h3></h3>
+    <p>我想和你一直走下去 慢慢的 稳稳的 宝宝</p>
+    <div class="stage-photos">
+      <img src="41.jpg" onclick="showImg(this.src)">
+      <img src="42.png" onclick="showImg(this.src)">
+      <img src="43.png" onclick="showImg(this.src)">
+      <img src="44.jpg" onclick="showImg(this.src)">
+      <img src="45.png" onclick="showImg(this.src)">
+    </div>
+  </div>
+
+  <!-- 阶段10（46-50：46/48/49/50是png，47是JPG大写） -->
+  <div class="stage">
+    <h3></h3>
+    <p>宝宝 我很爱很爱你</p>
+    <div class="stage-photos">
+      <img src="46.png" onclick="showImg(this.src)">
+      <img src="47.JPG" onclick="showImg(this.src)">
+      <img src="48.png" onclick="showImg(this.src)">
+      <img src="49.png" onclick="showImg(this.src)">
+      <img src="50.png" onclick="showImg(this.src)">
+    </div>
+  </div>
+
+  <p class="outro">这个小网站永远为你而开 每一年的生日它都会记得</p>
+</div>
+
+<!-- 放大弹窗 -->
+<div class="modal" id="imgModal" onclick="closeModal()">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="bigImg">
+</div>
+
+<script>
+// 1. 密码解锁
+function unlock() {
+  if (document.getElementById('pwd').value === '20070406') {
+    document.querySelector('.login-box').style.display = 'none';
+    document.querySelector('.album').style.display = 'block';
+  } else {
+    alert('密码不对哦 宝宝你看你手笨输错了');
+  }
+}
+
+// 2. 照片放大
+function showImg(src) {
+  document.getElementById('imgModal').style.display = 'block';
+  document.getElementById('bigImg').src = src;
+}
+function closeModal() {
+  document.getElementById('imgModal').style.display = 'none';
+}
+
+// 3. 在一起天数（在这里改你们在一起的日期）
+function setDayCount() {
+  var start = new Date("2024-12-26"); // ←←← 改成你们在一起的那天：年-月-日
+  var now = new Date();
+  var diff = Math.floor((now - start) / (1000*60*60*24));
+  document.getElementById("dayCount").innerText = "我们已经在一起 " + diff + " 天啦 小宝宝";
+}
+setDayCount();
+</script>
+</body>
+</html>
